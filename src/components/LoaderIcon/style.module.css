@@ -1,0 +1,42 @@
+.container {
+  width: 60px;
+  height: 60px;
+  overflow: hidden;
+  position: relative;
+}
+
+.imageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@keyframes scrollImages {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25%,
+  75% {
+    transform: translateY(calc(-100% + 100px));
+  }
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+  transform: translateY(100%);
+}
+
+.img.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.img.prevActive {
+  opacity: 1;
+  transform: translateY(-100%);
+}
