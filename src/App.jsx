@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import { RandomCityService } from "./services/random-city";
 import { weatherApi } from "./api/weather-info";
@@ -8,8 +8,6 @@ function App() {
   async function getRandomCityData() {
     const cityData = RandomCityService.getRandomCityData();
     console.log("City data:", cityData);
-    // console.log("City name:", cityData.name);
-    // console.log("City latitude:", cityData.latitude);
     const weather = await weatherApi.getWeatherData(
       cityData.latitude,
       cityData.longitude
@@ -17,10 +15,35 @@ function App() {
     console.log("Weather data:", weather);
   }
 
+  const [showLoader, setShowLoader] = useState(false);
+
+  const handleScroll = () => {
+    setShowLoader(true);
+    setTimeout(() => {
+      setShowLoader(false);
+    }, 5600); // 5.6s en millisecondes
+  };
+
+  useEffect(() => {
+    const handleInteraction = () => {
+      handleScroll();
+    };
+
+    window.addEventListener("wheel", handleInteraction);
+
+    // Ajoutez également l'écouteur pour les écrans tactiles
+    window.addEventListener("touchmove", handleInteraction);
+
+    return () => {
+      window.removeEventListener("wheel", handleInteraction);
+      window.removeEventListener("touchmove", handleInteraction);
+    };
+  }, []);
+
   return (
     <div className="App">
       <button onClick={getRandomCityData}>Obtenir une ville aléatoire</button>
-      <LoaderScreen />
+      {showLoader && <LoaderScreen />}
     </div>
   );
 }
