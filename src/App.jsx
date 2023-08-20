@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { RandomCityService } from "./services/random-city";
 import { weatherApi } from "./api/weather-info";
-import { LoaderIcon } from "./components/LoaderIcon/LoaderIcon";
+import { LoaderScreen } from "./components/LoaderScreen/LoaderScreen";
 
 function App() {
   async function getRandomCityData() {
@@ -20,7 +20,7 @@ function App() {
   return (
     <div className="App">
       <button onClick={getRandomCityData}>Obtenir une ville aléatoire</button>
-      <LoaderIcon />
+      <LoaderScreen />
     </div>
   );
 }
