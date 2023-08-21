@@ -32,7 +32,7 @@ export function LoaderIcon() {
               index === currentImageIndex ? style.active : ""
             } ${index === prevImageIndex ? style.prevActive : ""}`}
             style={{
-              animationDelay: `${index * 0.9}s`, // 1.4s = 0.4s + 1s (pause + transition time)
+              animationDelay: `${index * 1.4}s`, // 1.4s = 0.4s + 1s (pause + transition time)
               visibility:
                 index === currentImageIndex || index === prevImageIndex
                   ? "visible"
