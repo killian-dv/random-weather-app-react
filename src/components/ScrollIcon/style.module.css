@@ -1,0 +1,26 @@
+.container {
+  position: relative;
+  animation: translateYAnimation 2.5s cubic-bezier(0.57, -0.01, 0, 1.15)
+    infinite;
+}
+
+@keyframes translateYAnimation {
+  0%,
+  32%,
+  100% {
+    transform: translateY(0);
+  }
+  64%,
+  68% {
+    transform: translateY(-10px);
+  }
+}
+
+.icon {
+  width: 64px; /* Taille par défaut pour bureau */
+
+  @media (max-width: 768px) {
+    /* Taille pour écran mobile */
+    width: 42px;
+  }
+}

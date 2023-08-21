@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+import style from "./style.module.css";
 import { RandomCityService } from "./services/random-city";
 import { weatherApi } from "./api/weather-info";
 import { LoaderScreen } from "./components/LoaderScreen/LoaderScreen";
+import { Footer } from "./components/Footer/Footer";
 
 function App() {
   async function getRandomCityData() {
@@ -41,8 +42,11 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <button onClick={getRandomCityData}>Obtenir une ville aléatoire</button>
+    <div className={style.app}>
+      <main className={style.main}>
+        <button onClick={getRandomCityData}>Obtenir une ville aléatoire</button>
+      </main>
+      <Footer className={style.footer} />
       {showLoader && <LoaderScreen />}
     </div>
   );
