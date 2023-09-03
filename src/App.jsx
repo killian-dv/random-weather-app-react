@@ -21,6 +21,7 @@ function App() {
 
     // Mise à jour de l'état avec les données météorologiques
     setWeather(weatherData);
+    setRandomCityFetched(true);
   }
 
   const [showLoader, setShowLoader] = useState(false);
