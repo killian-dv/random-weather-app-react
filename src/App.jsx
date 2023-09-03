@@ -4,22 +4,29 @@ import { RandomCityService } from "./services/random-city";
 import { weatherApi } from "./api/weather-info";
 import { LoaderScreen } from "./components/LoaderScreen/LoaderScreen";
 import { Footer } from "./components/Footer/Footer";
+import { ActualWeatherIcon } from "./components/ActualWeatherIcon/ActualWeatherIon";
 
 function App() {
   async function getWeatherRandomCity() {
-    // const cityData = RandomCityService.getRandomCityData();
+    const cityData = RandomCityService.getRandomCityData();
     // console.log("City data:", cityData);
-    // const weather = await weatherApi.getWeatherData(
-    //   cityData.latitude,
-    //   cityData.longitude
-    // );
+    const weatherData = await weatherApi.getWeatherData(
+      cityData.latitude,
+      cityData.longitude
+    );
     // console.log("Weather data:", weather);
-    console.log("getWeatherRandomCity");
+    console.log("call api");
+    console.log("weather", weatherData.weather[0].icon);
+    // console.log("getWeatherRandomCity");
+
+    // Mise à jour de l'état avec les données météorologiques
+    setWeather(weatherData);
   }
 
   const [showLoader, setShowLoader] = useState(false);
   const [randomCityFetched, setRandomCityFetched] = useState(false);
   const [scrollInProgress, setScrollInProgress] = useState(false);
+  const [weather, setWeather] = useState(null);
 
   const handleScroll = async () => {
     if (!scrollInProgress) {
@@ -62,9 +69,9 @@ function App() {
   return (
     <div className={style.app}>
       <main className={style.main}>
-        <button onClick={getWeatherRandomCity}>
-          Obtenir une ville aléatoire
-        </button>
+        {randomCityFetched && weather && (
+          <ActualWeatherIcon icon={weather.weather[0].icon} />
+        )}
       </main>
       <Footer className={style.footer} />
       {showLoader && <LoaderScreen />}
