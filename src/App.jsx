@@ -10,55 +10,55 @@ import { ActualWeatherDescription } from "./components/ActualWeatherDescription/
 function App() {
   async function getWeatherRandomCity() {
     const cityData = RandomCityService.getRandomCityData();
-    // console.log("City data:", cityData);
-    // const weatherData = await weatherApi.getWeatherData(
-    //   cityData.latitude,
-    //   cityData.longitude
-    // );
+    console.log("City data:", cityData);
+    const weatherData = await weatherApi.getWeatherData(
+      cityData.latitude,
+      cityData.longitude
+    );
 
-    const weatherData = {
-      coord: {
-        lon: 45.3438,
-        lat: 2.0371,
-      },
-      weather: [
-        {
-          id: 802,
-          main: "Clouds",
-          description: "partiellement nuageux",
-          icon: "03n",
-        },
-      ],
-      base: "stations",
-      main: {
-        temp: 26.93,
-        feels_like: 29.41,
-        temp_min: 26.93,
-        temp_max: 26.93,
-        pressure: 1011,
-        humidity: 78,
-      },
-      visibility: 10000,
-      wind: {
-        speed: 7.2,
-        deg: 200,
-      },
-      clouds: {
-        all: 40,
-      },
-      dt: 1694878971,
-      sys: {
-        type: 1,
-        id: 2497,
-        country: "SO",
-        sunrise: 1694832604,
-        sunset: 1694876252,
-      },
-      timezone: 10800,
-      id: 53654,
-      name: "Mogadiscio",
-      cod: 200,
-    };
+    // const weatherData = {
+    //   coord: {
+    //     lon: 45.3438,
+    //     lat: 2.0371,
+    //   },
+    //   weather: [
+    //     {
+    //       id: 802,
+    //       main: "Clouds",
+    //       description: "partiellement nuageux",
+    //       icon: "03n",
+    //     },
+    //   ],
+    //   base: "stations",
+    //   main: {
+    //     temp: 26.93,
+    //     feels_like: 29.41,
+    //     temp_min: 26.93,
+    //     temp_max: 26.93,
+    //     pressure: 1011,
+    //     humidity: 78,
+    //   },
+    //   visibility: 10000,
+    //   wind: {
+    //     speed: 7.2,
+    //     deg: 200,
+    //   },
+    //   clouds: {
+    //     all: 40,
+    //   },
+    //   dt: 1694878971,
+    //   sys: {
+    //     type: 1,
+    //     id: 2497,
+    //     country: "SO",
+    //     sunrise: 1694832604,
+    //     sunset: 1694876252,
+    //   },
+    //   timezone: 10800,
+    //   id: 53654,
+    //   name: "Mogadiscio",
+    //   cod: 200,
+    // };
     console.log("Weather data:", weatherData);
     console.log("call api");
     console.log("weather", weatherData.weather[0].icon);
@@ -73,6 +73,7 @@ function App() {
   const [randomCityFetched, setRandomCityFetched] = useState(false);
   const [scrollInProgress, setScrollInProgress] = useState(false);
   const [weather, setWeather] = useState(null);
+  const [showDescription, setShowDescription] = useState(false);
 
   const handleScroll = async () => {
     if (!scrollInProgress) {
@@ -112,6 +113,19 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    // Au moment du rendu, activez l'animation en ajoutant la classe 'enter'
+    setShowDescription(true);
+
+    // Ajoutez un délai pour déclencher le retrait de la classe 'enter' après l'animation
+    const timeoutId = setTimeout(() => {
+      setShowDescription(false);
+    }, 500); // 500ms est la même durée que la transition CSS
+
+    // Nettoyez le timeout lors de la sortie du composant ou du changement de dépendances
+    return () => clearTimeout(timeoutId);
+  }, []); // Effectuer cette animation uniquement lors du montage initial
+
   const weatherIcon = weather?.weather[0]?.icon || "";
   const temperature = weather?.main?.temp || "";
   const cityName = weather?.name || "";
@@ -124,6 +138,9 @@ function App() {
           <>
             <ActualWeatherIcon icon={weatherIcon} />
             <ActualWeatherDescription
+              className={`${style.actual_weather_description} ${
+                showDescription ? "enter" : ""
+              }`}
               temperature={temperature}
               cityName={cityName}
               weatherDescription={weatherDescription}

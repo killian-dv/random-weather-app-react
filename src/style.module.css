@@ -17,3 +17,13 @@
 .footer {
   margin-top: auto;
 }
+
+.actual_weather_description {
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Lorsque la classe 'enter' est appliquée, déplacez ActualWeatherDescription vers la position initiale */
+.actual_weather_description.enter {
+  transform: translateX(0);
+}
