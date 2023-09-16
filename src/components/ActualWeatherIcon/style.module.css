@@ -1,0 +1,10 @@
+.container {
+  width: min-content;
+  position: absolute;
+  right: 0;
+  top: -10vh;
+}
+
+.img {
+  height: 80vh;
+}

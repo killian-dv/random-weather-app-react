@@ -50,12 +50,15 @@ export function ActualWeatherDescription({
 
   return (
     <div className={style.container}>
-      <h1>{Math.round(temperature)}°</h1>
-      <div>
+      <h1 className={style.temperature}>{Math.round(temperature)}°</h1>
+      <div className={style.container_state}>
         <img src={weatherIconBlack} alt="weather icon black" />
-        <p>{weatherDescription}</p>
+        <p>
+          {weatherDescription.charAt(0).toUpperCase() +
+            weatherDescription.slice(1)}
+        </p>
       </div>
-      <h2>{cityName}</h2>
+      <h2 className={style.city}>{cityName}</h2>
     </div>
   );
 }

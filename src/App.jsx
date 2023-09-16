@@ -11,54 +11,54 @@ function App() {
   async function getWeatherRandomCity() {
     const cityData = RandomCityService.getRandomCityData();
     // console.log("City data:", cityData);
-    const weatherData = await weatherApi.getWeatherData(
-      cityData.latitude,
-      cityData.longitude
-    );
+    // const weatherData = await weatherApi.getWeatherData(
+    //   cityData.latitude,
+    //   cityData.longitude
+    // );
 
-    // const weatherData = {
-    //   coord: {
-    //     lon: 45.3438,
-    //     lat: 2.0371,
-    //   },
-    //   weather: [
-    //     {
-    //       id: 802,
-    //       main: "Clouds",
-    //       description: "partiellement nuageux",
-    //       icon: "03n",
-    //     },
-    //   ],
-    //   base: "stations",
-    //   main: {
-    //     temp: 26.93,
-    //     feels_like: 29.41,
-    //     temp_min: 26.93,
-    //     temp_max: 26.93,
-    //     pressure: 1011,
-    //     humidity: 78,
-    //   },
-    //   visibility: 10000,
-    //   wind: {
-    //     speed: 7.2,
-    //     deg: 200,
-    //   },
-    //   clouds: {
-    //     all: 40,
-    //   },
-    //   dt: 1694878971,
-    //   sys: {
-    //     type: 1,
-    //     id: 2497,
-    //     country: "SO",
-    //     sunrise: 1694832604,
-    //     sunset: 1694876252,
-    //   },
-    //   timezone: 10800,
-    //   id: 53654,
-    //   name: "Mogadiscio",
-    //   cod: 200,
-    // };
+    const weatherData = {
+      coord: {
+        lon: 45.3438,
+        lat: 2.0371,
+      },
+      weather: [
+        {
+          id: 802,
+          main: "Clouds",
+          description: "partiellement nuageux",
+          icon: "03n",
+        },
+      ],
+      base: "stations",
+      main: {
+        temp: 26.93,
+        feels_like: 29.41,
+        temp_min: 26.93,
+        temp_max: 26.93,
+        pressure: 1011,
+        humidity: 78,
+      },
+      visibility: 10000,
+      wind: {
+        speed: 7.2,
+        deg: 200,
+      },
+      clouds: {
+        all: 40,
+      },
+      dt: 1694878971,
+      sys: {
+        type: 1,
+        id: 2497,
+        country: "SO",
+        sunrise: 1694832604,
+        sunset: 1694876252,
+      },
+      timezone: 10800,
+      id: 53654,
+      name: "Mogadiscio",
+      cod: 200,
+    };
     console.log("Weather data:", weatherData);
     console.log("call api");
     console.log("weather", weatherData.weather[0].icon);
